@@ -1,11 +1,28 @@
 const ruteo = document.querySelector("#ruteo");
 const menu = document.querySelector("#menu");
 
+const RUTAS_PUBLICAS = ["/login", "/registro"];
+const RUTAS_PRIVADAS = ["/peliculas", "/mapa"];
+
 ruteo.addEventListener("ionRouteWillChange", navegar);
 
 function navegar(evt) {
-  let paginaDestino = evt.detail.to;
+  const paginaDestino = evt.detail.to;
+  const estaLogueado = !!localStorage.getItem("token");
+
+  if (!estaLogueado && RUTAS_PRIVADAS.includes(paginaDestino)) {
+    setTimeout(() => ruteo.push("/login"), 0);
+    return;
+  }
+
+  if (estaLogueado && RUTAS_PUBLICAS.includes(paginaDestino)) {
+    setTimeout(() => ruteo.push("/peliculas"), 0);
+    return;
+  }
+
+  actualizarMenu(estaLogueado);
   ocultarPaginas();
+
   switch (paginaDestino) {
     case "/login":
       document.querySelector("#page-login").style.display = "block";
@@ -22,6 +39,14 @@ function navegar(evt) {
       document.querySelector("#page-mapa").style.display = "block";
       break;
   }
+}
+
+function actualizarMenu(estaLogueado) {
+  document.querySelector("#menu-login").style.display = estaLogueado ? "none" : "";
+  document.querySelector("#menu-registro").style.display = estaLogueado ? "none" : "";
+  document.querySelector("#menu-peliculas").style.display = estaLogueado ? "" : "none";
+  document.querySelector("#menu-mapa").style.display = estaLogueado ? "" : "none";
+  document.querySelector("#menu-logout").style.display = estaLogueado ? "" : "none";
 }
 
 function ocultarPaginas() {

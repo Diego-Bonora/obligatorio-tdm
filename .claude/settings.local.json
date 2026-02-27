@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add src/)",
+      "Bash(git commit -m \"feat: login de usuario\")",
+      "Bash(git push)"
+    ]
+  }
+}
