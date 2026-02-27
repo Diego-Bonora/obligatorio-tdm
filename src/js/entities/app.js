@@ -14,6 +14,19 @@ class App {
 
   // ── Autenticación ────────────────────────────────────────
 
+  async login(usuario, password) {
+    const data = await fetchData(
+      "login",
+      { usuario, password },
+      "POST"
+    );
+    if (data.codigo === 200 && data.token) {
+      this.#loggedInUser = new Usuario(null, usuario, null, data.token);
+      localStorage.setItem("token", data.token);
+    }
+    return data;
+  }
+
   async registrar(usuario, password, idPais) {
     const data = await fetchData(
       "usuarios",

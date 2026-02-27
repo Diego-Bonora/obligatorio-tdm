@@ -74,7 +74,22 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <!-- Formulario de login -->
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Usuario</ion-label>
+              <ion-input id="log-usuario" type="text" placeholder="Ingrese su usuario"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Contraseña</ion-label>
+              <ion-input id="log-password" type="password" placeholder="Ingrese su contraseña"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-text id="log-error" color="danger" style="display: none;">
+            <p id="log-error-msg" class="ion-padding-horizontal"></p>
+          </ion-text>
+          <div class="ion-padding">
+            <ion-button expand="block" onclick="login()">Ingresar</ion-button>
+          </div>
         </ion-content>
       </ion-page>
 
