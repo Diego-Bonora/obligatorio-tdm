@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+
+# Capacitor / Android build
+android/
+.capacitor/
+
+# IDEs
+.vscode/
+.idea/

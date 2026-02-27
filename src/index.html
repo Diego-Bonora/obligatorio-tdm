@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taller Desarrollo Mobile</title>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+  </head>
+  <body>
+    <ion-app>
+      <ion-router id="ruteo">
+        <ion-route url="/login" component="page-login"></ion-route>
+        <ion-route url="/registro" component="page-registro"></ion-route>
+        <ion-route url="/peliculas" component="page-peliculas"></ion-route>
+        <ion-route url="/mapa" component="page-mapa"></ion-route>
+      </ion-router>
+      <ion-router-outlet></ion-router-outlet>
+
+      <ion-menu content-id="main-content" id="menu">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Menú</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-list>
+            <ion-item href="/login" onclick="cerrarMenu()">
+              <ion-icon name="log-in-outline" slot="end"></ion-icon>
+              <ion-label>Login</ion-label>
+            </ion-item>
+            <ion-item href="/registro" onclick="cerrarMenu()">
+              <ion-icon name="person-add-outline" slot="end"></ion-icon>
+              <ion-label>Registro</ion-label>
+            </ion-item>
+            <ion-item href="/peliculas" onclick="cerrarMenu()">
+              <ion-icon name="film-outline" slot="end"></ion-icon>
+              <ion-label>Peliculas</ion-label>
+            </ion-item>
+            <ion-item href="/mapa" onclick="cerrarMenu()">
+              <ion-icon name="map-outline" slot="end"></ion-icon>
+              <ion-label>Mapa</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+
+      <div class="ion-page" id="main-content"></div>
+
+      <ion-page class="ion-page" id="page-login" style="display: none">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Login</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <!-- Formulario de login -->
+        </ion-content>
+      </ion-page>
+
+      <ion-page class="ion-page" id="page-registro" style="display: none">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Registro</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Usuario</ion-label>
+              <ion-input id="reg-usuario" type="text" placeholder="Ingrese su usuario"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Contraseña</ion-label>
+              <ion-input id="reg-password" type="password" placeholder="Ingrese su contraseña"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>País</ion-label>
+              <ion-select id="reg-pais" placeholder="Seleccionar país"></ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-text id="reg-error" color="danger" style="display: none;">
+            <p id="reg-error-msg" class="ion-padding-horizontal"></p>
+          </ion-text>
+          <div class="ion-padding">
+            <ion-button expand="block" onclick="registrar()">Registrarse</ion-button>
+          </div>
+        </ion-content>
+      </ion-page>
+
+      <ion-page class="ion-page" id="page-peliculas" style="display: none">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Peliculas</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <!-- Listado de peliculas -->
+        </ion-content>
+      </ion-page>
+
+      <ion-page class="ion-page" id="page-mapa" style="display: none">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Mapa</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <div id="mapa" style="width: 100%; height: 400px"></div>
+        </ion-content>
+      </ion-page>
+    </ion-app>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="js/entities/usuario.js"></script>
+    <script src="js/entities/pelicula.js"></script>
+    <script src="js/entities/categoria.js"></script>
+    <script src="js/entities/pais.js"></script>
+    <script src="js/entities/usuarioPorPais.js"></script>
+    <script src="js/entities/app.js"></script>
+    <script src="js/utils/fetchData.js"></script>
+    <script src="js/utils/navigate.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
