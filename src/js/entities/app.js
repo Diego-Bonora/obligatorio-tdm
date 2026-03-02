@@ -1,8 +1,12 @@
 class App {
   #loggedInUser;
+  #categorias;
+  #peliculas;
 
   constructor() {
     this.#loggedInUser = null;
+    this.#categorias = [];
+    this.#peliculas = [];
   }
 
   // ── Países ───────────────────────────────────────────────
@@ -47,5 +51,52 @@ class App {
 
   getLoggedInUser() {
     return this.#loggedInUser;
+  }
+
+  // ── Categorías ───────────────────────────────────────────
+
+  async cargarCategorias() {
+    const data = await fetchData("categorias");
+    this.#categorias = data.categorias.map(
+      (c) => new Categoria(c.id, c.nombre, c.edad_requerida, c.estado, c.emoji)
+    );
+    return this.#categorias;
+  }
+
+  getCategorias() {
+    return this.#categorias;
+  }
+
+  // ── Películas ─────────────────────────────────────────────
+
+  async analizarSentimiento(prompt) {
+    const data = await fetchData("genai", { prompt }, "POST");
+    return data;
+  }
+
+  async agregarPelicula(idCategoria, nombre, fecha) {
+    const data = await fetchData(
+      "peliculas",
+      { idCategoria, nombre, fecha },
+      "POST"
+    );
+    return data;
+  }
+
+  async cargarPeliculas() {
+    const data = await fetchData("peliculas");
+    this.#peliculas = data.peliculas.map(
+      (p) => new Pelicula(p.id, p.idCategoria, p.idUsuario, p.nombre, p.fechaEstreno)
+    );
+    return this.#peliculas;
+  }
+
+  getPeliculas() {
+    return this.#peliculas;
+  }
+
+  async eliminarPelicula(id) {
+    const data = await fetchData(`peliculas/${id}`, {}, "DELETE");
+    return data;
   }
 }

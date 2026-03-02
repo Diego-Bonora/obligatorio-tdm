@@ -33,6 +33,8 @@ function navegar(evt) {
       break;
     case "/peliculas":
       document.querySelector("#page-peliculas").style.display = "block";
+      cargarCategoriasPeliculas();
+      cargarListaPeliculas();
       break;
     case "/mapa":
       setTimeout(() => { if (typeof mostrarMapa === "function") mostrarMapa(); }, 50);

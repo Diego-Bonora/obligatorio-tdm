@@ -11,7 +11,7 @@ const fetchData = async (pathname, params = {}, method = "GET") => {
   // Agregar token si existe
   const token = localStorage.getItem("token");
   if (token) {
-    headers["apikey"] = token;
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   try {
@@ -37,6 +37,13 @@ const fetchData = async (pathname, params = {}, method = "GET") => {
     // Parsear respuesta JSON
     const data = await response.json();
 
+    // Si el token expiró, desloguear y redirigir al login
+    if (response.status === 401) {
+      localStorage.removeItem("token");
+      ruteo.push("/login");
+      return Promise.reject(data);
+    }
+
     // Si el servidor devuelve error HTTP, rechazar con los datos
     if (!response.ok) {
       return Promise.reject(data);
@@ -47,4 +54,3 @@ const fetchData = async (pathname, params = {}, method = "GET") => {
     return Promise.reject(error);
   }
 };
-

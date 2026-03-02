@@ -136,11 +136,58 @@
             <ion-buttons slot="start">
               <ion-menu-button></ion-menu-button>
             </ion-buttons>
-            <ion-title>Peliculas</ion-title>
+            <ion-title>Películas</ion-title>
+            <ion-buttons slot="end">
+              <ion-button id="btn-mostrar-form-pelicula">
+                <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <!-- Listado de peliculas -->
+
+          <div id="form-pelicula" style="display: none;">
+            <ion-list>
+              <ion-item>
+                <ion-label>Categoría</ion-label>
+                <ion-select id="pel-categoria" placeholder="Seleccionar categoría"></ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input id="pel-nombre" type="text" placeholder="Nombre de la película"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Fecha de visualización</ion-label>
+                <ion-input id="pel-fecha" type="date"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Comentario</ion-label>
+                <ion-textarea id="pel-comentario" placeholder="Tu opinión sobre la película" rows="3"></ion-textarea>
+              </ion-item>
+            </ion-list>
+            <ion-text id="pel-error" color="danger" style="display: none;">
+              <p id="pel-error-msg" class="ion-padding-horizontal"></p>
+            </ion-text>
+            <div class="ion-padding">
+              <ion-button id="btn-agregar-pelicula" expand="block">Agregar</ion-button>
+              <ion-button id="btn-cancelar-pelicula" expand="block" fill="outline" color="medium">Cancelar</ion-button>
+            </div>
+          </div>
+
+          <ion-segment id="filtro-peliculas" value="todas">
+            <ion-segment-button value="todas">
+              <ion-label>Todas</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="semana">
+              <ion-label>Última semana</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="mes">
+              <ion-label>Último mes</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+
+          <ion-list id="lista-peliculas"></ion-list>
+
         </ion-content>
       </ion-page>
 
@@ -171,6 +218,7 @@
     <script src="js/index.js"></script>
     <script src="js/pages/login.js"></script>
     <script src="js/pages/registro.js"></script>
+    <script src="js/pages/peliculas.js"></script>
     <script src="js/utils/events.js"></script>
   </body>
 </html>
