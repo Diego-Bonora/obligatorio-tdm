@@ -2,7 +2,7 @@ let filtroActual = "todas";
 
 async function cargarListaPeliculas() {
   try {
-    await app.cargarPeliculas();
+    await Promise.all([app.cargarPeliculas(), app.cargarCategorias()]);
     renderizarPeliculas();
   } catch (error) {
     mostrarToast("Error al cargar las películas.", "danger");

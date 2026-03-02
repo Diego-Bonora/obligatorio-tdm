@@ -99,4 +99,20 @@ class App {
     const data = await fetchData(`peliculas/${id}`, {}, "DELETE");
     return data;
   }
+
+  // ── Mapa ─────────────────────────────────────────────────────
+
+  async cargarUsuariosPorPais() {
+    const [dataUsuarios, dataPaises] = await Promise.all([
+      fetchData("usuariosPorPais"),
+      fetchData("paises"),
+    ]);
+    return dataUsuarios.paises
+      .map((u) => {
+        const pais = dataPaises.paises.find((p) => p.id === u.id);
+        if (!pais) return null;
+        return new UsuarioPorPais(u.id, u.nombre, u.cantidadDeUsuarios, pais.latitud, pais.longitud);
+      })
+      .filter(Boolean);
+  }
 }
