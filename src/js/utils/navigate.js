@@ -2,7 +2,7 @@ const ruteo = document.querySelector("#ruteo");
 const menu = document.querySelector("#menu");
 
 const RUTAS_PUBLICAS = ["/login", "/registro"];
-const RUTAS_PRIVADAS = ["/peliculas", "/mapa"];
+const RUTAS_PRIVADAS = ["/peliculas", "/estadisticas", "/mapa"];
 
 ruteo.addEventListener("ionRouteWillChange", navegar);
 
@@ -36,6 +36,10 @@ function navegar(evt) {
       cargarCategoriasPeliculas();
       cargarListaPeliculas();
       break;
+    case "/estadisticas":
+      document.querySelector("#page-estadisticas").style.display = "block";
+      mostrarEstadisticas();
+      break;
     case "/mapa":
       setTimeout(() => { if (typeof mostrarMapa === "function") mostrarMapa(); }, 50);
       document.querySelector("#page-mapa").style.display = "block";
@@ -47,6 +51,7 @@ function actualizarMenu(estaLogueado) {
   document.querySelector("#menu-login").style.display = estaLogueado ? "none" : "";
   document.querySelector("#menu-registro").style.display = estaLogueado ? "none" : "";
   document.querySelector("#menu-peliculas").style.display = estaLogueado ? "" : "none";
+  document.querySelector("#menu-estadisticas").style.display = estaLogueado ? "" : "none";
   document.querySelector("#menu-mapa").style.display = estaLogueado ? "" : "none";
   document.querySelector("#menu-logout").style.display = estaLogueado ? "" : "none";
 }
